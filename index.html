@@ -123,59 +123,48 @@
   .belief .tag { grid-column: 2; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .belief .tag span { font: 400 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--blue); border: 1px solid rgba(29,63,143,.35); padding: 8px 11px; border-radius: 999px; }
 
-  /* ---------- Card deck ---------- */
-  .table {
-    position: relative; z-index: 4; padding: 46vh 24px 40vh; overflow-x: clip;
-    background-color: var(--felt);
-    background-image:
-      radial-gradient(ellipse at 50% 30%, rgba(255,255,255,.08), transparent 60%),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 .05  0 0 0 0 .2  0 0 0 .45 0'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
+  /* ---------- Paper trail (career on a desk) ---------- */
+  .desk {
+    position: relative; z-index: 4; padding: 12vh 24px 36vh; overflow-x: clip;
+    background: #18284e url(assets/art/desk-1920.webp) center / cover no-repeat;
   }
-  .table .head { display: grid; place-items: center; margin-bottom: 64px; }
-  .card {
-    width: 210px; height: 296px; border-radius: 14px; padding: 6px;
-    background: var(--vermilion); box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 10px 24px -6px rgba(5,10,30,.55);
-    position: relative;
+  .desk::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(10,18,40,0) 40%, rgba(10,18,40,.35) 100%); pointer-events: none; }
+  .desk .intro { position: relative; text-align: center; color: var(--cream); margin-bottom: 6vh; }
+  .desk .intro .k { font: 400 12.5px var(--mono); letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+  .desk .intro h2 { font: 400 clamp(40px, 5.6vw, 76px)/1 var(--serif); letter-spacing: -.015em; margin: 12px 0 0; text-shadow: 0 2px 20px rgba(0,0,0,.35); }
+  .papers { position: relative; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px 26px; align-items: start; }
+  .pp { position: relative; grid-column: span var(--span, 1); transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)); filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)) drop-shadow(0 14px 18px rgba(5,10,30,.45)); cursor: pointer; outline: none; z-index: 1; }
+  .pp .sheet2 {
+    position: relative; padding: 24px 24px 22px; min-height: 196px;
+    background:
+      radial-gradient(ellipse at 45% 35%, rgba(255,251,238,.75), rgba(255,251,238,0) 65%),
+      radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 58%, rgba(120,84,40,.30) 100%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .33  0 0 0 0 .18  0 0 0 .16 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
+      #eedfbe;
   }
-  .card .face { height: 100%; border-radius: 9px; background: var(--cream); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-  .card.title .face { display: grid; place-items: center; }
-  .card.title .face b { font: 500 64px/1 var(--serif); color: var(--vermilion); letter-spacing: -.02em; }
-  .card.title .face small { position: absolute; left: 12px; top: 10px; font: 500 12px var(--mono); color: var(--vermilion); }
-  .card.title .face small.r { left: auto; top: auto; right: 12px; bottom: 10px; transform: rotate(180deg); }
-
-  .deck { display: grid; grid-template-columns: repeat(4, 210px); justify-content: center; gap: 28px; }
-  .col { position: relative; }
-  .col .lbl { font: 400 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75); text-align: center; margin-bottom: 16px; }
-  .stack { position: relative; }
-  .stack .card { position: absolute; left: 0; cursor: pointer; transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .3s, opacity .6s; outline: none; }
-  .stack .card .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; height: 58px; border-bottom: 1px solid #eadfcf; }
-  .stack .card .top .lg { width: 34px; height: 34px; border-radius: 7px; background: #fff; border: 1px solid #eadfcf; display: grid; place-items: center; overflow: hidden; flex: none; }
-  .stack .card .top .lg img { width: 74%; height: 74%; object-fit: contain; }
-  .stack .card .top .lg.full img { width: 100%; height: 100%; object-fit: cover; }
-  .stack .card .top .lg.ink { background: #1b1d22; border-color: #1b1d22; }
-  .stack .card .top .lg.cream { background: #f4eee1; }
-  .stack .card .top .lg.cream svg { width: 26px; height: 26px; }
-  .stack .card .top .lg.green { background: #2c6e49; border-color: #2c6e49; color: #fff; font: 500 16px var(--serif); }
-  .stack .card .top .co { font: 500 17px/1.1 var(--serif); color: var(--paper-ink); text-align: right; }
-  .stack .card .body { padding: 14px 14px 12px; display: flex; flex-direction: column; flex: 1; }
-  .stack .card .role { font: 500 15px/1.3 var(--sans); color: var(--paper-ink); }
-  .stack .card .when { font: 400 11.5px var(--mono); color: var(--vermilion-deep); margin-top: 6px; letter-spacing: .03em; }
-  .stack .card .desc { font-size: 13.5px; line-height: 1.5; color: #5b4c40; margin-top: 10px; }
-  .stack .card .pip { margin-top: auto; align-self: flex-end; font: 500 20px var(--serif); color: var(--vermilion); font-style: italic; }
-  .stack .card:focus-visible, .stack .card.open { transform: translateY(-16px) rotate(-1.2deg) !important; z-index: 30 !important; box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 26px 40px -10px rgba(5,10,30,.7); }
-  .back { position: absolute; left: 0; width: 210px; height: 296px; border-radius: 14px; padding: 6px; background: var(--vermilion); box-shadow: 0 10px 24px -6px rgba(5,10,30,.55); }
-  .back div { height: 100%; border-radius: 9px; background-color: var(--vermilion);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26'><text x='4' y='19' font-family='Georgia,serif' font-size='14' fill='%23fbe7dc'>ab</text></svg>");
-    border: 2px solid #fbe7dc; }
-
-  @media (hover: hover) { .stack .card:hover { transform: translateY(-16px) rotate(-1.2deg) !important; z-index: 30 !important; box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 26px 40px -10px rgba(5,10,30,.7); } }
-  /* deal animation */
-  .js .deck .card, .js .deck .back { opacity: 0; transform: translate(var(--fx, 0), -70vh) rotate(var(--fr, -12deg)); }
-  .js .deck.dealt .card, .js .deck.dealt .back { opacity: 1; transform: none; transition: transform .9s cubic-bezier(.2,.9,.25,1) var(--d, 0s), opacity .4s ease var(--d, 0s); }
-  .js .deck.settled .card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
-  .js .table .head .card { opacity: 0; transform: translateY(-40px) rotate(6deg) scale(.9); }
-  .js .table .head.dealt .card { opacity: 1; transform: none; transition: transform 1s cubic-bezier(.2,.9,.25,1), opacity .5s; }
-  .table .hint { text-align: center; margin-top: 54px; font: 400 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+  .pp .hd { display: flex; align-items: center; gap: 12px; }
+  .pp .lg { width: 40px; height: 40px; border-radius: 8px; background: #fff; border: 1px solid #e3d3b0; display: grid; place-items: center; overflow: hidden; flex: none; }
+  .pp .lg img { width: 74%; height: 74%; object-fit: contain; }
+  .pp .lg.full img { width: 100%; height: 100%; object-fit: cover; }
+  .pp .lg.ink { background: #1b1d22; border-color: #1b1d22; }
+  .pp .lg.cream { background: #f4eee1; }
+  .pp .lg.cream svg { width: 30px; height: 30px; }
+  .pp .lg.green { background: #2c6e49; border-color: #2c6e49; color: #fff; font: 500 18px var(--serif); }
+  .pp .co { font: 400 26px/1.05 var(--serif); color: #2a1d14; }
+  .pp .role { font: 500 15.5px/1.35 var(--sans); color: #2a1d14; margin-top: 14px; }
+  .pp .when { font: 400 12px var(--mono); color: var(--vermilion-deep); letter-spacing: .05em; margin-top: 5px; }
+  .pp .desc { font-size: 14.5px; line-height: 1.55; color: #5a4a3a; margin-top: 10px; }
+  .pp .more { display: inline-block; margin-top: 12px; font: 500 12px var(--mono); letter-spacing: .06em; color: var(--blue); text-transform: uppercase; }
+  .pp.big .co { font-size: 34px; }
+  .pp.big .sheet2 { padding: 28px 30px 26px; }
+  .pp, .js .papers.tossed .pp { transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .3s; }
+  @media (hover: hover) { .pp:hover { transform: translate(var(--x, 0), calc(var(--y, 0px) - 12px)) rotate(0deg) scale(1.03); z-index: 5; filter: drop-shadow(0 2px 2px rgba(0,0,0,.25)) drop-shadow(0 26px 30px rgba(5,10,30,.55)); } }
+  .pp:focus-visible { transform: translate(var(--x, 0), calc(var(--y, 0px) - 12px)) rotate(0deg) scale(1.03); z-index: 5; }
+  /* papers get tossed onto the desk */
+  .js .papers .pp { opacity: 0; transform: translate(calc(var(--x, 0px) + var(--fx, 0px)), -70vh) rotate(var(--fr, 30deg)); }
+  .js .papers.tossed .pp { opacity: 1; transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)); transition: transform 1.1s cubic-bezier(.16,.9,.3,1.04) var(--d, 0s), opacity .3s ease var(--d, 0s); }
+  .js .papers.settled .pp { transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .3s; }
+  .desk .hint { position: relative; text-align: center; margin-top: 8vh; font: 400 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(246,241,231,.7); }
 
   /* ---------- Writing (paper) ---------- */
   .writing { position: relative; z-index: 6; margin-top: -22vh; }
@@ -218,11 +207,11 @@
   .modal.on { visibility: visible; }
   .modal .scrim { position: absolute; inset: 0; background: rgba(8,16,38,.62); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; transition: opacity .35s; }
   .modal.on .scrim { opacity: 1; }
-  .mcard { position: relative; width: min(640px, 100%); max-height: min(86vh, 860px); overflow: auto; border-radius: 18px; padding: 8px; background: var(--vermilion);
+  .mcard { position: relative; width: min(640px, 100%); max-height: min(86vh, 860px); overflow: auto; border-radius: 4px; padding: 0; background: #eedfbe;
     box-shadow: 0 40px 80px -20px rgba(0,0,0,.6); transform: translateY(40px) rotate(-2deg) scale(.92); opacity: 0; transition: transform .5s cubic-bezier(.2,.9,.25,1), opacity .3s; overscroll-behavior: contain; }
   .modal.on .mcard { transform: none; opacity: 1; }
-  .mface { background: var(--cream); border-radius: 12px; min-height: 100%; }
-  .mface .top { display: flex; align-items: center; gap: 14px; padding: 22px 26px; border-bottom: 1px solid #eadfcf; }
+  .mface { min-height: 100%; background: radial-gradient(ellipse at 45% 30%, rgba(255,251,238,.8), rgba(255,251,238,0) 60%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 60%, rgba(120,84,40,.25) 100%); }
+  .mface .top { display: flex; align-items: center; gap: 14px; padding: 26px 28px 18px; border-bottom: 1px solid rgba(90,60,30,.18); }
   .mface .top .lg { width: 52px; height: 52px; border-radius: 11px; background: #fff; border: 1px solid #eadfcf; display: grid; place-items: center; overflow: hidden; flex: none; }
   .mface .top .lg img { width: 74%; height: 74%; object-fit: contain; }
   .mface .top .lg.full img { width: 100%; height: 100%; object-fit: cover; }
@@ -235,7 +224,7 @@
   .mbody .role { font: 500 18px/1.35 var(--sans); color: var(--paper-ink); }
   .mbody .when { font: 400 12.5px var(--mono); color: var(--vermilion-deep); letter-spacing: .06em; margin-top: 6px; }
   .mbody ul { list-style: none; padding: 0; margin: 20px 0 0; }
-  .mbody li { position: relative; padding: 12px 0 12px 22px; border-top: 1px solid #eee4d4; color: #4f4136; font-size: 16px; line-height: 1.6; }
+  .mbody li { position: relative; padding: 12px 0 12px 22px; border-top: 1px solid rgba(90,60,30,.14); color: #4f4136; font-size: 16px; line-height: 1.6; }
   .mbody li::before { content: "✦"; position: absolute; left: 0; top: 13px; font-size: 11px; color: var(--vermilion); }
   .mbody li b { color: var(--paper-ink); font-weight: 600; }
   .mbody a { color: var(--blue); }
@@ -244,16 +233,13 @@
   .mcard .x:hover { background: var(--vermilion); color: #fff; border-color: var(--vermilion); }
   @media (max-width: 640px) {
     .modal { padding: 0; place-items: end center; }
-    .mcard { width: 100%; max-height: 88vh; border-radius: 18px 18px 0 0; padding: 6px 6px 0; transform: translateY(100%); }
-    .mface { border-radius: 12px 12px 0 0; }
+    .mcard { width: 100%; max-height: 88vh; border-radius: 6px 6px 0 0; transform: translateY(100%); }
     .mface .top, .mbody { padding-left: 20px; padding-right: 20px; }
   }
 
   @media (max-width: 980px) {
-    .deck { grid-template-columns: repeat(2, 190px); gap: 46px 20px; }
-    .card, .back { width: 190px !important; }
-    .card { height: 276px; }
-    .back { height: 276px; }
+    .papers { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+    .desk { background-image: url(assets/art/desk-1280.webp); }
   }
   @media (max-width: 640px) {
     .bar { padding: 20px; }
@@ -270,19 +256,22 @@
     .belief { grid-template-columns: 1fr; text-align: center; }
     .belief .num { margin-bottom: 18px; }
     .belief p, .belief .tag { grid-column: 1; }
-    .deck { grid-template-columns: repeat(2, 158px); gap: 40px 14px; }
-    .card, .back { width: 158px !important; height: 236px; }
-    .stack .card .top { height: 52px; padding: 8px 9px; }
-    .stack .card .top .co { font-size: 15px; }
-    .stack .card .desc { display: none; }
-    .table .head .card { width: 170px !important; height: 240px; }
+    .papers { gap: 22px 12px; }
+    .pp .sheet2 { padding: 18px 16px 16px; min-height: 0; }
+    .pp .co { font-size: 21px; }
+    .pp.big .co { font-size: 26px; }
+    .pp.big .sheet2 { padding: 20px 18px 18px; }
+    .pp .lg { width: 34px; height: 34px; }
+    .pp .desc { display: none; }
+    .pp.big .desc { display: block; }
+    .pp .role { font-size: 14px; margin-top: 10px; }
     .posts a { grid-template-columns: 34px 1fr; }
     .posts .go { display: none; }
     .foot { justify-content: center; text-align: center; }
   }
   @media (prefers-reduced-motion: reduce) {
     .scroll-hint i { animation: none; }
-    .js .deck .card, .js .deck .back, .js .table .head .card { opacity: 1 !important; transform: none !important; }
+    .js .papers .pp { opacity: 1 !important; transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)) !important; }
   }
 </style>
 <script>document.documentElement.classList.add("js");</script>
@@ -385,84 +374,36 @@
     <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAACwBACdASogABIAPu1oq1AppaOiqA1RMB2JZQDA3EXXZzyuNGXzEPm0OjVxZ0MAAP7zccpTRrCApkZ3yKtBTwpX78OLz4Xmmjd74YqKA3iwr3lUQu4CLQBDu+vVeTzZU9wS3fwKrJCmu38FQAA=)"><picture><source type="image/webp" srcset="assets/art/path-720.webp 720w, assets/art/path-1280.webp 1280w, assets/art/path-1920.webp 1920w" sizes="108vw"><img src="assets/art/path-1280.webp" alt="" loading="eager" fetchpriority="low" decoding="async"></picture></div></div>
   </section>
 
-  <!-- Deck -->
-  <section class="table" id="deck" aria-labelledby="deck-h">
-    <h2 id="deck-h" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Work and education</h2>
-    <div class="head">
-      <div class="card title"><div class="face"><small>A</small><b>ab =</b><small class="r">B</small></div></div>
-    </div>
-    <div class="deck">
-      <div class="col">
-        <div class="lbl">Now</div>
-        <div class="stack" style="height:356px">
-          <div class="card" tabindex="0" role="button" data-d="aika" style="top:0;z-index:1;--d:.05s;--fx:-30vw;--fr:-18deg">
-            <div class="face">
-              <div class="top"><span class="lg cream"><svg><use href="#aika"/></svg></span><span class="co">Aika Labs</span></div>
-              <div class="body"><div class="role">Founder</div><div class="when">SEP 2026 — NOW</div><div class="desc">AI anyone in India can call and talk to in their own language.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-          <div class="back" style="top:60px;z-index:0;--d:.5s;--fx:-20vw;--fr:10deg"><div></div></div>
-        </div>
+  <!-- Paper trail -->
+  <section class="desk" id="deck" aria-labelledby="deck-h">
+    <div class="intro"><div class="k">Work &amp; study</div><h2 id="deck-h">The paper trail.</h2></div>
+    <div class="papers">
+      <div class="pp big" tabindex="0" role="button" data-d="aika" aria-label="Aika Labs, Founder. Open details" style="--span:2;--x:8px;--y:0px;--r:-2.2deg;--fx:-30vw;--fr:-40deg;--d:.05s">
+        <div class="sheet2"><div class="hd"><span class="lg cream"><svg><use href="#aika"/></svg></span><span class="co">Aika Labs</span></div><div class="role">Founder</div><div class="when">SEP 2026 — NOW</div><div class="desc">AI that anyone in India can call on an ordinary phone and talk to in their own language.</div><span class="more">Read more →</span></div>
       </div>
-      <div class="col">
-        <div class="lbl">Engineer</div>
-        <div class="stack" style="height:356px">
-          <div class="card" tabindex="0" role="button" data-d="amazon" style="top:0;z-index:1;--d:.15s;--fx:-10vw;--fr:14deg">
-            <div class="face">
-              <div class="top"><span class="lg"><img src="assets/logos/amazon.svg" alt=""></span><span class="co">Amazon</span></div>
-              <div class="body"><div class="role">Software Engineer → Engineering Lead</div><div class="when">JUL 2017 — APR 2026</div><div class="desc">AI Shopping for Emerging Stores. Catalog federation, personalization, privacy at 350+ services, secure third-party data sharing.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-          <div class="card" tabindex="0" role="button" data-d="auxia" style="top:60px;z-index:2;--d:.25s;--fx:5vw;--fr:-9deg">
-            <div class="face">
-              <div class="top"><span class="lg"><img src="assets/logos/auxia.png" alt=""></span><span class="co">Auxia</span></div>
-              <div class="body"><div class="role">Staff Engineer</div><div class="when">APR — AUG 2026</div><div class="desc">Led the offline delivery platform at an AI marketing scale-up.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-        </div>
+      <div class="pp big" tabindex="0" role="button" data-d="amazon" aria-label="Amazon, Software Engineer → Engineering Lead. Open details" style="--span:2;--x:-6px;--y:18px;--r:1.6deg;--fx:30vw;--fr:35deg;--d:.15s">
+        <div class="sheet2"><div class="hd"><span class="lg"><img src="assets/logos/amazon.svg" alt=""></span><span class="co">Amazon</span></div><div class="role">Software Engineer → Engineering Lead</div><div class="when">JUL 2017 — APR 2026</div><div class="desc">Eight-plus years. Catalog federation, personalization, privacy across 350+ services, and a data-sharing platform that still runs Amazon India’s accounting.</div><span class="more">Read more →</span></div>
       </div>
-      <div class="col">
-        <div class="lbl">Early days</div>
-        <div class="stack" style="height:416px">
-          <div class="card" tabindex="0" role="button" data-d="holidify" style="top:0;z-index:1;--d:.3s;--fx:10vw;--fr:-14deg">
-            <div class="face">
-              <div class="top"><span class="lg full"><img src="assets/logos/holidify.png" alt=""></span><span class="co">Holidify</span></div>
-              <div class="body"><div class="role">Android Intern</div><div class="when">MAY — JUL 2015</div><div class="desc">Built the location-aware “Near Me” feature for sights and eateries.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-          <div class="card" tabindex="0" role="button" data-d="amazon-intern" style="top:60px;z-index:2;--d:.38s;--fx:18vw;--fr:12deg">
-            <div class="face">
-              <div class="top"><span class="lg"><img src="assets/logos/amazon.svg" alt=""></span><span class="co">Amazon</span></div>
-              <div class="body"><div class="role">Software Engineer Intern</div><div class="when">MAY — JUL 2016</div><div class="desc">Built and launched the jewelry price breakup feature.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-          <div class="card" tabindex="0" role="button" data-d="gobio" style="top:120px;z-index:3;--d:.46s;--fx:24vw;--fr:-8deg">
-            <div class="face">
-              <div class="top"><span class="lg green">G</span><span class="co">Go-Bio</span></div>
-              <div class="body"><div class="role">Part-time Intern</div><div class="when">AUG 2016 — APR 2017</div><div class="desc">Led the intern engineering team and designed the architecture for a pre-seed marketplace for nursery plants.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-        </div>
+      <div class="pp" tabindex="0" role="button" data-d="auxia" aria-label="Auxia, Staff Engineer. Open details" style="--span:1;--x:10px;--y:-4px;--r:-3.5deg;--fx:-20vw;--fr:-25deg;--d:.3s">
+        <div class="sheet2"><div class="hd"><span class="lg"><img src="assets/logos/auxia.png" alt=""></span><span class="co">Auxia</span></div><div class="role">Staff Engineer</div><div class="when">APR — AUG 2026</div><div class="desc">Led the offline delivery platform.</div><span class="more">Read more →</span></div>
       </div>
-      <div class="col">
-        <div class="lbl">Student</div>
-        <div class="stack" style="height:356px">
-          <div class="card" tabindex="0" role="button" data-d="snu" style="top:0;z-index:1;--d:.55s;--fx:30vw;--fr:16deg">
-            <div class="face">
-              <div class="top"><span class="lg ink"><img src="assets/logos/snu.png" alt="" style="width:88%"></span><span class="co">Shiv Nadar University</span></div>
-              <div class="body"><div class="role">B.Tech, Computer Science</div><div class="when">2013 — 2017</div><div class="desc">Minor in Economics.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-          <div class="card" tabindex="0" role="button" data-d="utaustin" style="top:60px;z-index:2;--d:.62s;--fx:36vw;--fr:-12deg">
-            <div class="face">
-              <div class="top"><span class="lg"><img src="assets/logos/utexas.png" alt=""></span><span class="co">UT Austin</span></div>
-              <div class="body"><div class="role">M.S. Artificial Intelligence</div><div class="when">AUG 2026 — NOW</div><div class="desc">Online program, alongside building Aika.</div><div class="pip">ab</div></div>
-            </div>
-          </div>
-        </div>
+      <div class="pp" tabindex="0" role="button" data-d="gobio" aria-label="Go-Bio, Part-time Intern. Open details" style="--span:1;--x:-8px;--y:22px;--r:4deg;--fx:-8vw;--fr:28deg;--d:.4s">
+        <div class="sheet2"><div class="hd"><span class="lg green">G</span><span class="co">Go-Bio</span></div><div class="role">Part-time Intern</div><div class="when">AUG 2016 — APR 2017</div><div class="desc">Led the intern team; designed a plant marketplace.</div><span class="more">Read more →</span></div>
+      </div>
+      <div class="pp" tabindex="0" role="button" data-d="amazon-intern" aria-label="Amazon, SDE Intern. Open details" style="--span:1;--x:6px;--y:-10px;--r:-1.5deg;--fx:8vw;--fr:-30deg;--d:.5s">
+        <div class="sheet2"><div class="hd"><span class="lg"><img src="assets/logos/amazon.svg" alt=""></span><span class="co">Amazon</span></div><div class="role">SDE Intern</div><div class="when">MAY — JUL 2016</div><div class="desc">Launched the jewelry price breakup.</div><span class="more">Read more →</span></div>
+      </div>
+      <div class="pp" tabindex="0" role="button" data-d="holidify" aria-label="Holidify, Android Intern. Open details" style="--span:1;--x:-4px;--y:14px;--r:3deg;--fx:22vw;--fr:22deg;--d:.6s">
+        <div class="sheet2"><div class="hd"><span class="lg full"><img src="assets/logos/holidify.png" alt=""></span><span class="co">Holidify</span></div><div class="role">Android Intern</div><div class="when">MAY — JUL 2015</div><div class="desc">Built the “Near Me” feature.</div><span class="more">Read more →</span></div>
+      </div>
+      <div class="pp" tabindex="0" role="button" data-d="snu" aria-label="Shiv Nadar University, B.Tech, Computer Science. Open details" style="--span:2;--x:14px;--y:0px;--r:2.4deg;--fx:-26vw;--fr:-20deg;--d:.72s">
+        <div class="sheet2"><div class="hd"><span class="lg ink"><img src="assets/logos/snu.png" alt="" style="width:88%"></span><span class="co">Shiv Nadar University</span></div><div class="role">B.Tech, Computer Science</div><div class="when">2013 — 2017</div><div class="desc">Minor in Economics. Also a singer-songwriter on campus stages.</div><span class="more">Read more →</span></div>
+      </div>
+      <div class="pp" tabindex="0" role="button" data-d="utaustin" aria-label="UT Austin, M.S. Artificial Intelligence. Open details" style="--span:2;--x:-10px;--y:10px;--r:-2.8deg;--fx:26vw;--fr:24deg;--d:.84s">
+        <div class="sheet2"><div class="hd"><span class="lg"><img src="assets/logos/utexas.png" alt=""></span><span class="co">UT Austin</span></div><div class="role">M.S. Artificial Intelligence</div><div class="when">AUG 2026 — NOW</div><div class="desc">Online master’s, alongside building Aika.</div><span class="more">Read more →</span></div>
       </div>
     </div>
-    <div class="hint">Tap a card to read more</div>
+    <div class="hint">Tap any page to read more</div>
   </section>
 
   <!-- Writing -->
@@ -556,6 +497,16 @@
   }
   document.querySelectorAll(".torn").forEach(tear);
 
+  // Deckled edges on each parchment.
+  document.querySelectorAll(".pp .sheet2").forEach((el) => {
+    const pts = [], n = 22, a = 2.6;
+    for (let i = 0; i <= n; i++) pts.push(`${(i / n) * 100}% ${(rnd() * a).toFixed(1)}px`);
+    for (let i = 0; i <= n; i++) pts.push(`calc(100% - ${(rnd() * a).toFixed(1)}px) ${(i / n) * 100}%`);
+    for (let i = n; i >= 0; i--) pts.push(`${(i / n) * 100}% calc(100% - ${(rnd() * a).toFixed(1)}px)`);
+    for (let i = n; i >= 0; i--) pts.push(`${(rnd() * a).toFixed(1)}px ${(i / n) * 100}%`);
+    el.style.clipPath = `polygon(${pts.join(",")})`;
+  });
+
   // Smooth scrolling.
   let lenis = null;
   if (!reduce && window.Lenis) {
@@ -611,14 +562,14 @@
   }
   if (!reduce) requestAnimationFrame(loop);
 
-  // Deal the deck once it scrolls into view.
-  const toDeal = [...document.querySelectorAll(".deck, .table .head")];
+  // Toss the papers onto the desk once it scrolls into view.
+  const toDeal = [...document.querySelectorAll(".papers")];
   function deal() {
     toDeal.forEach((el) => {
-      if (el.classList.contains("dealt")) return;
-      if (el.getBoundingClientRect().top < innerHeight * 0.85) { el.classList.add("dealt"); setTimeout(() => el.classList.add("settled"), 1700); }
+      if (el.classList.contains("tossed")) return;
+      if (el.getBoundingClientRect().top < innerHeight * 0.85) { el.classList.add("tossed"); setTimeout(() => el.classList.add("settled"), 2200); }
     });
-    if (toDeal.every((el) => el.classList.contains("dealt"))) removeEventListener("scroll", deal);
+    if (toDeal.every((el) => el.classList.contains("tossed"))) removeEventListener("scroll", deal);
   }
   addEventListener("scroll", deal, { passive: true });
   deal();
@@ -643,7 +594,7 @@
     if (lenis) lenis.start();
     if (lastCard) lastCard.focus({ preventScroll: true });
   }
-  document.querySelectorAll(".stack .card").forEach((c) => {
+  document.querySelectorAll(".pp").forEach((c) => {
     c.addEventListener("click", () => openCard(c));
     c.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openCard(c); } });
   });
