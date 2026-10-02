@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://ayushbhattacharya.com/">
 <meta property="og:title" content="Ayush Bhattacharya">
 <meta property="og:description" content="Founder of Aika Labs. Previously Auxia and Amazon.">
-<meta property="og:image" content="https://ayushbhattacharya.com/assets/art/hero.jpg">
+<meta property="og:image" content="https://ayushbhattacharya.com/assets/art/hero-og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@beayushb">
 <meta name="theme-color" content="#21365f">
@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=EB+Garamond:wght@400;500&family=Google+Sans+Code:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/art/hero.jpg">
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/art/hero-720.avif 720w, assets/art/hero-1280.avif 1280w, assets/art/hero-1920.avif 1920w" imagesizes="108vw" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,6 +84,9 @@
   .scene { position: relative; height: 190vh; overflow-x: clip; }
   .scene .stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
   .scene .art { position: absolute; inset: -4%; background-size: cover; background-position: center; will-change: transform; transform-origin: 50% 50%; }
+  .scene .art picture, .scene .art img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .scene .art img { object-fit: cover; opacity: 0; transition: opacity .9s ease; }
+  .scene .art img.loaded { opacity: 1; }
   .scene .art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,45,.35) 0%, rgba(10,20,45,0) 30%, rgba(10,20,45,0) 70%, rgba(10,20,45,.25) 100%); }
 
   .hero .copy {
@@ -220,6 +223,7 @@
     .seal { width: 84px; height: 84px; margin-left: -42px; top: 70px; }
     .scroll-hint { display: none; }
     .hero .art { background-position: 72% center; }
+    .hero .art img { object-position: 72% center; }
     .strip { margin: -26vh 0; }
     .strip .content { padding: 15vh 22px; min-height: 70vh; }
     .belief { grid-template-columns: 1fr; text-align: center; }
@@ -289,7 +293,7 @@
   <!-- Scene 0: hero -->
   <section class="scene hero" data-zoom="1.28" aria-label="Introduction">
     <div class="stick">
-      <div class="art" style="background-image:url(assets/art/hero.jpg)"></div>
+      <div class="art" style="background-image:url(data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADwBACdASogABIAPu1qr1CppaQiqAqpMB2JYwC7AA8dQ/XF7VngePXWzJe/U1c+QQAA/d7sIvIKNo9hdC4AH8kE+S26gnRYrt1SzTT9Xy5rSy6WCRkvrQ+iRxQdVOaXwQZNb7Po2y8WtilPs3OTShQoAAA=)"><picture><source type="image/avif" srcset="assets/art/hero-720.avif 720w, assets/art/hero-1280.avif 1280w, assets/art/hero-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/hero-720.webp 720w, assets/art/hero-1280.webp 1280w, assets/art/hero-1920.webp 1920w" sizes="108vw"><img src="assets/art/hero-1280.webp" alt="" loading="eager" fetchpriority="high" decoding="async"></picture></div>
       <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
         <g filter="url(#emboss)">
           <circle cx="60" cy="60" r="52" fill="#d9401f" filter="url(#wobble)"/>
@@ -323,7 +327,7 @@
   </section>
 
   <section class="scene" data-zoom="1.22" data-pan="-3" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(assets/art/phone.jpg)"></div></div>
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwBACdASogABIAPu1kqE2ppaOiMAgBMB2JQBA0AN7gPoOxOC5xWYY6xvyYSlCAAP7mYDP8O180kO9jj2StDib4fRqfrYmX9rzHLHzn55Ct8SEn0qeCDEA1o8YsDwkO1p3leMwA)"><picture><source type="image/avif" srcset="assets/art/phone-720.avif 720w, assets/art/phone-1280.avif 1280w, assets/art/phone-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/phone-720.webp 720w, assets/art/phone-1280.webp 1280w, assets/art/phone-1920.webp 1920w" sizes="108vw"><img src="assets/art/phone-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
   </section>
 
   <!-- II: Family -->
@@ -342,7 +346,7 @@
   </section>
 
   <section class="scene" data-zoom="1.2" data-pan="3" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(assets/art/home.jpg)"></div></div>
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBQCdASogABIAPu1qq08ppiOiMBgIATAdiUAWI/HYof86YUt+7xWch8BUu9yTGj4AAP7vSXUup2b9Pxldfgf5rh0vaYGPNNMP5hcChdlEce2cX11mv6rnZGppdyBu6X/wz3Sa46IITj6KFrEklmR6NHAAAA==)"><picture><source type="image/avif" srcset="assets/art/home-720.avif 720w, assets/art/home-1280.avif 1280w, assets/art/home-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/home-720.webp 720w, assets/art/home-1280.webp 1280w, assets/art/home-1920.webp 1920w" sizes="108vw"><img src="assets/art/home-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
   </section>
 
   <!-- III: Learning -->
@@ -361,7 +365,7 @@
   </section>
 
   <section class="scene" data-zoom="1.25" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(assets/art/path.jpg)"></div></div>
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBQCdASogABIAPu1mqk2ppaQiMAgBMB2JYwC2+gwAwQZ/+NfDcWIjK+hkQm+mHsEM0AD+0zARGMElry2ddi5dUOgDCSM1OD8cGUdKWup0UbmEj64Sewl1dYu6bNQTynQtLKHQqAAAAA==)"><picture><source type="image/avif" srcset="assets/art/path-720.avif 720w, assets/art/path-1280.avif 1280w, assets/art/path-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/path-720.webp 720w, assets/art/path-1280.webp 1280w, assets/art/path-1920.webp 1920w" sizes="108vw"><img src="assets/art/path-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
   </section>
 
   <!-- Deck -->
@@ -518,6 +522,12 @@
     sheet.querySelector(".paper").style.clipPath = poly(4);
   }
   document.querySelectorAll(".torn").forEach(tear);
+
+  // Fade each painting in over its blurred placeholder once it has loaded.
+  document.querySelectorAll(".scene .art img").forEach((img) => {
+    const done = () => img.classList.add("loaded");
+    if (img.complete && img.naturalWidth) done(); else img.addEventListener("load", done, { once: true });
+  });
 
   // Smooth scrolling.
   let lenis = null;
