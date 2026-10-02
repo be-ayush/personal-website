@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=EB+Garamond:wght@400;500&family=Google+Sans+Code:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="preload" as="image" type="image/avif" imagesrcset="assets/art/hero-720.avif 720w, assets/art/hero-1280.avif 1280w, assets/art/hero-1920.avif 1920w" imagesizes="108vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/art/hero-720.webp 720w, assets/art/hero-1280.webp 1280w, assets/art/hero-1920.webp 1920w" imagesizes="108vw" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -85,8 +85,7 @@
   .scene .stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
   .scene .art { position: absolute; inset: -4%; background-size: cover; background-position: center; will-change: transform; transform-origin: 50% 50%; }
   .scene .art picture, .scene .art img { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .scene .art img { object-fit: cover; opacity: 0; transition: opacity .9s ease; }
-  .scene .art img.loaded { opacity: 1; }
+  .scene .art img { object-fit: cover; }
   .scene .art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,45,.35) 0%, rgba(10,20,45,0) 30%, rgba(10,20,45,0) 70%, rgba(10,20,45,.25) 100%); }
 
   .hero .copy {
@@ -104,7 +103,7 @@
 
   /* ---------- Torn paper strips ---------- */
   .strip { position: relative; z-index: 5; margin: -38vh 0; pointer-events: none; overflow-x: clip; }
-  .strip .sheet { position: relative; filter: drop-shadow(0 -3px 6px rgba(0,0,0,.18)) drop-shadow(0 4px 8px rgba(0,0,0,.2)); will-change: transform; }
+  .strip .sheet { position: relative; filter: drop-shadow(0 -3px 6px rgba(0,0,0,.18)) drop-shadow(0 4px 8px rgba(0,0,0,.2)); }
   .strip .rim, .strip .paper { position: absolute; inset: 0; }
   .strip .rim { background: #fffdf8; }
   .strip .paper {
@@ -112,7 +111,7 @@
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .3  0 0 0 0 .2  0 0 0 .08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     overflow: hidden;
   }
-  .strip .mark { position: absolute; font: 400 clamp(380px, 62vw, 900px)/1 var(--script); color: var(--paper-mark); top: 50%; left: 50%; transform: translate(-50%, -54%); white-space: nowrap; user-select: none; will-change: transform; }
+  .strip .mark { position: absolute; font: 400 clamp(380px, 62vw, 900px)/1 var(--script); color: var(--paper-mark); top: 50%; left: 50%; transform: translate(-50%, -54%); white-space: nowrap; user-select: none; }
   .strip .content { position: relative; min-height: 76vh; display: grid; place-items: center; padding: 18vh 24px; pointer-events: auto; }
   .belief { display: grid; grid-template-columns: auto 1fr; gap: 0 clamp(28px, 6vw, 80px); max-width: 860px; align-items: baseline; }
   .belief .num { font: 400 clamp(30px, 3.6vw, 46px)/1 var(--serif); }
@@ -170,6 +169,7 @@
   /* deal animation */
   .js .deck .card, .js .deck .back { opacity: 0; transform: translate(var(--fx, 0), -70vh) rotate(var(--fr, -12deg)); }
   .js .deck.dealt .card, .js .deck.dealt .back { opacity: 1; transform: none; transition: transform .9s cubic-bezier(.2,.9,.25,1) var(--d, 0s), opacity .4s ease var(--d, 0s); }
+  .js .deck.settled .card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
   .js .table .head .card { opacity: 0; transform: translateY(-40px) rotate(6deg) scale(.9); }
   .js .table .head.dealt .card { opacity: 1; transform: none; transition: transform 1s cubic-bezier(.2,.9,.25,1), opacity .5s; }
   .table .hint { text-align: center; margin-top: 54px; font: 400 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); }
@@ -293,7 +293,7 @@
   <!-- Scene 0: hero -->
   <section class="scene hero" data-zoom="1.28" aria-label="Introduction">
     <div class="stick">
-      <div class="art" style="background-image:url(data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADwBACdASogABIAPu1qr1CppaQiqAqpMB2JYwC7AA8dQ/XF7VngePXWzJe/U1c+QQAA/d7sIvIKNo9hdC4AH8kE+S26gnRYrt1SzTT9Xy5rSy6WCRkvrQ+iRxQdVOaXwQZNb7Po2y8WtilPs3OTShQoAAA=)"><picture><source type="image/avif" srcset="assets/art/hero-720.avif 720w, assets/art/hero-1280.avif 1280w, assets/art/hero-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/hero-720.webp 720w, assets/art/hero-1280.webp 1280w, assets/art/hero-1920.webp 1920w" sizes="108vw"><img src="assets/art/hero-1280.webp" alt="" loading="eager" fetchpriority="high" decoding="async"></picture></div>
+      <div class="art" style="background-image:url(data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADwBACdASogABIAPu1qr1CppaQiqAqpMB2JYwC7AA8dQ/XF7VngePXWzJe/U1c+QQAA/d7sIvIKNo9hdC4AH8kE+S26gnRYrt1SzTT9Xy5rSy6WCRkvrQ+iRxQdVOaXwQZNb7Po2y8WtilPs3OTShQoAAA=)"><picture><source type="image/webp" srcset="assets/art/hero-720.webp 720w, assets/art/hero-1280.webp 1280w, assets/art/hero-1920.webp 1920w" sizes="108vw"><img src="assets/art/hero-1280.webp" alt="" loading="eager" fetchpriority="high" decoding="async"></picture></div>
       <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
         <g filter="url(#emboss)">
           <circle cx="60" cy="60" r="52" fill="#d9401f" filter="url(#wobble)"/>
@@ -327,7 +327,7 @@
   </section>
 
   <section class="scene" data-zoom="1.22" data-pan="-3" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwBACdASogABIAPu1kqE2ppaOiMAgBMB2JQBA0AN7gPoOxOC5xWYY6xvyYSlCAAP7mYDP8O180kO9jj2StDib4fRqfrYmX9rzHLHzn55Ct8SEn0qeCDEA1o8YsDwkO1p3leMwA)"><picture><source type="image/avif" srcset="assets/art/phone-720.avif 720w, assets/art/phone-1280.avif 1280w, assets/art/phone-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/phone-720.webp 720w, assets/art/phone-1280.webp 1280w, assets/art/phone-1920.webp 1920w" sizes="108vw"><img src="assets/art/phone-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAACwBACdASogABIAPu1kqE2ppaOiMAgBMB2JQBA0AN7gPoOxOC5xWYY6xvyYSlCAAP7mYDP8O180kO9jj2StDib4fRqfrYmX9rzHLHzn55Ct8SEn0qeCDEA1o8YsDwkO1p3leMwA)"><picture><source type="image/webp" srcset="assets/art/phone-720.webp 720w, assets/art/phone-1280.webp 1280w, assets/art/phone-1920.webp 1920w" sizes="108vw"><img src="assets/art/phone-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
   </section>
 
   <!-- II: Family -->
@@ -346,7 +346,7 @@
   </section>
 
   <section class="scene" data-zoom="1.2" data-pan="3" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBQCdASogABIAPu1qq08ppiOiMBgIATAdiUAWI/HYof86YUt+7xWch8BUu9yTGj4AAP7vSXUup2b9Pxldfgf5rh0vaYGPNNMP5hcChdlEce2cX11mv6rnZGppdyBu6X/wz3Sa46IITj6KFrEklmR6NHAAAA==)"><picture><source type="image/avif" srcset="assets/art/home-720.avif 720w, assets/art/home-1280.avif 1280w, assets/art/home-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/home-720.webp 720w, assets/art/home-1280.webp 1280w, assets/art/home-1920.webp 1920w" sizes="108vw"><img src="assets/art/home-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBQCdASogABIAPu1qq08ppiOiMBgIATAdiUAWI/HYof86YUt+7xWch8BUu9yTGj4AAP7vSXUup2b9Pxldfgf5rh0vaYGPNNMP5hcChdlEce2cX11mv6rnZGppdyBu6X/wz3Sa46IITj6KFrEklmR6NHAAAA==)"><picture><source type="image/webp" srcset="assets/art/home-720.webp 720w, assets/art/home-1280.webp 1280w, assets/art/home-1920.webp 1920w" sizes="108vw"><img src="assets/art/home-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
   </section>
 
   <!-- III: Learning -->
@@ -365,7 +365,7 @@
   </section>
 
   <section class="scene" data-zoom="1.25" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBQCdASogABIAPu1mqk2ppaQiMAgBMB2JYwC2+gwAwQZ/+NfDcWIjK+hkQm+mHsEM0AD+0zARGMElry2ddi5dUOgDCSM1OD8cGUdKWup0UbmEj64Sewl1dYu6bNQTynQtLKHQqAAAAA==)"><picture><source type="image/avif" srcset="assets/art/path-720.avif 720w, assets/art/path-1280.avif 1280w, assets/art/path-1920.avif 1920w" sizes="108vw"><source type="image/webp" srcset="assets/art/path-720.webp 720w, assets/art/path-1280.webp 1280w, assets/art/path-1920.webp 1920w" sizes="108vw"><img src="assets/art/path-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBQCdASogABIAPu1mqk2ppaQiMAgBMB2JYwC2+gwAwQZ/+NfDcWIjK+hkQm+mHsEM0AD+0zARGMElry2ddi5dUOgDCSM1OD8cGUdKWup0UbmEj64Sewl1dYu6bNQTynQtLKHQqAAAAA==)"><picture><source type="image/webp" srcset="assets/art/path-720.webp 720w, assets/art/path-1280.webp 1280w, assets/art/path-1920.webp 1920w" sizes="108vw"><img src="assets/art/path-1280.webp" alt="" loading="lazy" decoding="async"></picture></div></div>
   </section>
 
   <!-- Deck -->
@@ -523,12 +523,6 @@
   }
   document.querySelectorAll(".torn").forEach(tear);
 
-  // Fade each painting in over its blurred placeholder once it has loaded.
-  document.querySelectorAll(".scene .art img").forEach((img) => {
-    const done = () => img.classList.add("loaded");
-    if (img.complete && img.naturalWidth) done(); else img.addEventListener("load", done, { once: true });
-  });
-
   // Smooth scrolling.
   let lenis = null;
   if (!reduce && window.Lenis) {
@@ -557,12 +551,6 @@
       const pan = parseFloat(s.dataset.pan || 0);
       s.querySelector(".art").style.transform = `translate3d(${pan * p}%, ${(p - 0.5) * -4}%, 0) scale(${1 + (z - 1) * p})`;
     });
-    sheets.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      const p = (r.top + r.height / 2 - vh / 2) / vh;
-      el.style.transform = `translate3d(0, ${p * 26}px, 0) rotate(${p * -0.6}deg)`;
-    });
     marks.forEach((m) => {
       const r = m.parentElement.getBoundingClientRect();
       if (r.bottom < 0 || r.top > vh) return;
@@ -583,18 +571,25 @@
   addEventListener('scroll', headerTone, { passive: true });
   headerTone();
 
+  let lastY = -1;
   function loop(t) {
     if (lenis) lenis.raf(t);
-    frame();
+    if (scrollY !== lastY) { lastY = scrollY; frame(); }
     requestAnimationFrame(loop);
   }
   if (!reduce) requestAnimationFrame(loop);
 
-  // Deal the deck when it comes into view.
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add("dealt"); io.unobserve(e.target); }
-  }), { threshold: 0.25 });
-  document.querySelectorAll(".deck, .table .head").forEach((el) => io.observe(el));
+  // Deal the deck once it scrolls into view.
+  const toDeal = [...document.querySelectorAll(".deck, .table .head")];
+  function deal() {
+    toDeal.forEach((el) => {
+      if (el.classList.contains("dealt")) return;
+      if (el.getBoundingClientRect().top < innerHeight * 0.85) { el.classList.add("dealt"); setTimeout(() => el.classList.add("settled"), 1700); }
+    });
+    if (toDeal.every((el) => el.classList.contains("dealt"))) removeEventListener("scroll", deal);
+  }
+  addEventListener("scroll", deal, { passive: true });
+  deal();
 
   // Tap to raise a card on touch screens.
   document.querySelectorAll(".stack .card").forEach((c) => c.addEventListener("click", () => {
