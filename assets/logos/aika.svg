@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <style>
+    :root { --c: #2F1D11; }
+    @media (prefers-color-scheme: dark) { :root { --c: #F4EEE1; } }
+  </style>
+  <g transform="translate(32.0 32.0) scale(0.40889) translate(-86 -110)" stroke="var(--c)" stroke-width="16" stroke-linecap="round">
+    <path d="M139.027 68.8616 A64 64 0 1 0 139.027 151.138"/>
+    <path d="M90 74 A36 36 0 0 0 90 146"/>
+    <circle cx="90" cy="110" r="14" fill="var(--c)" stroke="none"/>
+    <path d="M146 46 V174"/>
+  </g>
+</svg>
