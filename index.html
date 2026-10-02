@@ -83,6 +83,10 @@
   .scene { position: relative; height: 190vh; overflow-x: clip; }
   .scene .stick { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--blue-deep); }
   .scene .art { position: absolute; inset: -4%; background-size: cover; background-position: center; will-change: transform; transform-origin: 50% 50%; }
+  .scene.still { height: 260vh; }
+  .scene.still .art { inset: -1%; }
+  .scene.still .art img { object-position: 50% 58%; }
+  @media (max-aspect-ratio: 4/5) { .scene.still .art img { object-position: 50% 50%; } }
   .scene .art picture, .scene .art img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .scene .art img { object-fit: cover; }
   .scene .art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,45,.35) 0%, rgba(10,20,45,0) 30%, rgba(10,20,45,0) 70%, rgba(10,20,45,.25) 100%); }
@@ -358,8 +362,8 @@
     </div>
   </section>
 
-  <section class="scene" data-zoom="1.2" data-pan="3" aria-hidden="true">
-    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBQCdASogABIAPu1qq08ppiOiMBgIATAdiUATpmq4of8KnFIeIiwshywUpWQs1yO78AD+70l1LqfAji3DEyL4VjCscAIJN4ZT6tXGMOATowKZOg4GcXiJKjX5eHpSnadShHXqpHyX8eKviEiZUcpCibknuvBgAAA=)"><picture><source type="image/webp" srcset="assets/art/home-720.webp 720w, assets/art/home-1280.webp 1280w, assets/art/home-1920.webp 1920w" sizes="108vw"><img src="assets/art/home-1280.webp" alt="" loading="eager" fetchpriority="low" decoding="async"></picture></div></div>
+  <section class="scene still" data-zoom="1.03" data-pan="0" data-drift="0" aria-hidden="true">
+    <div class="stick"><div class="art" style="background-image:url(data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBQCdASogABIAPu1qq08ppiOiMBgIATAdiUATpmq4of8KnFIeIiwshywUpWQs1yO78AD+70l1LqfAji3DEyL4VjCscAIJN4ZT6tXGMOATowKZOg4GcXiJKjX5eHpSnadShHXqpHyX8eKviEiZUcpCibknuvBgAAA=)"><picture><source media="(max-aspect-ratio: 4/5)" type="image/webp" srcset="assets/art/home-tall-540.webp 540w, assets/art/home-tall-900.webp 900w, assets/art/home-tall-1280.webp 1280w" sizes="102vw"><source type="image/webp" srcset="assets/art/home-720.webp 720w, assets/art/home-1280.webp 1280w, assets/art/home-1920.webp 1920w" sizes="108vw"><img src="assets/art/home-1280.webp" alt="" loading="eager" fetchpriority="low" decoding="async"></picture></div></div>
   </section>
 
   <!-- III: Learning -->
@@ -577,7 +581,8 @@
       const p = clamp((vh - r.top) / (r.height + vh), 0, 1);
       const z = parseFloat(s.dataset.zoom || 1.2);
       const pan = parseFloat(s.dataset.pan || 0);
-      s.querySelector(".art").style.transform = `translate3d(${pan * p}%, ${(p - 0.5) * -4}%, 0) scale(${1 + (z - 1) * p})`;
+      const drift = s.dataset.drift === "0" ? 0 : (p - 0.5) * -4;
+      s.querySelector(".art").style.transform = `translate3d(${pan * p}%, ${drift}%, 0) scale(${1 + (z - 1) * p})`;
     });
     marks.forEach((m) => {
       const r = m.parentElement.getBoundingClientRect();
